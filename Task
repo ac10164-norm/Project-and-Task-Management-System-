@@ -1,11 +1,11 @@
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 
 
 public class Task {
     
     private String title;
-    private Sttring description;
+    private String description;
     private LocalDateTime deadline;
     private LocalDateTime creationDate;
     private Status status;
@@ -65,5 +65,24 @@ public class Task {
         this.tags.remove(tag);
     }
 
+    public boolean isOverdue() {
+        LocalDateTime current = LocalDateTime.now();
+        if current.isAfter(this.deadline) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
+    public boolean isUrgent() {
+        LocalDateTime current = LocalDateTime.now();
+        long hours = ChronoUnit.HOURS.between(current, this.deadline);
+        if (hours <= 48) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
