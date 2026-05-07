@@ -10,8 +10,15 @@ public class ProjectManager {
         projects.add(project);
     }
 
-    public void editProject(Project project) {
-
+    public void editProject(String title, LocalDateTime deadline, String description) {
+		for (int i = 0; i < projects.size(); i++) {
+			if (projects.get(i).getTitle().equals(title)) {
+				projects.remove(i);
+			}
+		}
+        Project project = new Project(title, deadline);
+        projects.add(project);
+        project.setDescription(description);
     }
 
     public void deleteProject(Project project) {
@@ -19,7 +26,7 @@ public class ProjectManager {
     }
 
     public List<Project> getProjects() {
-        return this.projects;
+        return ProjectManager.projects;
     }
 
     public List<Object> search(String keyword) {

@@ -3,11 +3,11 @@ import java.time.LocalDateTime;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class EditProjectGUI extends JFrame {
+public class EditTaskGUI extends JFrame {
     
     private JPanel contentPane;
 
-    public EditProjectGUI() {
+    public EditTaskGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -64,10 +64,8 @@ public class EditProjectGUI extends JFrame {
 			contentPane.add(description);
     }
 
-    void edit(String input1, String input2, String input3) {
-        ProjectManager p = new ProjectManager();
-		p.editProject(input1, LocalDateTime.parse(input2), input3);
-		dispose();
+    void edit(String input1, String input2, String input) {
+
     }
 }
 

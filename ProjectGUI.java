@@ -1,8 +1,8 @@
 import java.awt.event.*;
 import java.time.LocalDateTime;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
-import java.util.*;
 
 public class ProjectGUI extends JFrame {
     
@@ -75,8 +75,38 @@ public class ProjectGUI extends JFrame {
                     b2.setBounds(240, 172, 117, 29);
                     contentPane.add(b2);
 
+					JButton b3 = new JButton("Add Task");
+                    b3.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            String input = t1.getText();
+                            task(input, 1);
+                        }
+                    });
+                    b3.setBounds(21, 210, 117, 29);
+                    contentPane.add(b3);
+
+                    JButton b4 = new JButton("Edit Task");
+                    b4.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            String input = t1.getText();
+                            task(input, 2);
+                        }
+                    });
+                    b4.setBounds(145, 210, 117, 29);
+                    contentPane.add(b4);
+
+					JButton b5 = new JButton("Delete Task");
+                    b5.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            String input = t1.getText();
+                            task(input, 3);
+                        }
+                    });
+                    b5.setBounds(270, 210, 117, 29);
+                    contentPane.add(b5);
+
                     JLabel projectName = new JLabel("Project Name");
-                    projectName.setBounds(137, 73, 61, 16);
+                    projectName.setBounds(137, 73, 100, 16);
                     contentPane.add(projectName);
                 }
             case 3 ->                 {
@@ -102,7 +132,7 @@ public class ProjectGUI extends JFrame {
                     b3.setBounds(240, 172, 117, 29);
                     contentPane.add(b3);
                     JLabel projectName = new JLabel("Project Name");
-                    projectName.setBounds(137, 73, 61, 16);
+                    projectName.setBounds(137, 73, 100, 16);
                     contentPane.add(projectName);
                 }
             default -> {
@@ -133,8 +163,14 @@ public class ProjectGUI extends JFrame {
 		
 	}
 
-	// void task() {
-	// 	TaskGUI c1 = new TaskGUI();
-	// 	c1.show();
-	// }
+	void task(String title, int action) {
+		ProjectManager p = new ProjectManager();
+		List<Project> list = p.getProjects();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getTitle().equals(title)) {
+				TaskGUI c1 = new TaskGUI(list.get(i), action);
+				c1.show();
+			}
+		}
+	}
 }
