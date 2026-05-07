@@ -75,7 +75,6 @@ public class EditProjectGUI extends JFrame {
     void edit(Project project, String input1, String input2, String input3) {
         ProjectManager p = new ProjectManager();
 		p.editProject(project, input1, input2, input3);
-		dispose();
     }
 }
 

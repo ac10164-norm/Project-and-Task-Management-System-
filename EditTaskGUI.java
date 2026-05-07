@@ -60,20 +60,23 @@ public class EditTaskGUI extends JFrame {
 			contentPane.add(b2);
 			
 			JLabel title = new JLabel("Title");
-			title.setBounds(137, 25, 61, 16);
+			title.setBounds(100, 25, 61, 16);
 			contentPane.add(title);
 			
 			JLabel deadline = new JLabel("Deadline (yyyy-mm-dd)");
-			deadline.setBounds(137, 73, 200, 16);
+			deadline.setBounds(100, 73, 200, 16);
 			contentPane.add(deadline);
 
 			JLabel description = new JLabel("Description");
-			description.setBounds(137, 121, 100, 16);
+			description.setBounds(100, 121, 100, 16);
 			contentPane.add(description);
     }
 
     void edit(Task task, String input1, String input2, String input3) {
-		task.setDeadline(LocalDateTime.parse(input2));
+		input2 += " 00:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(input2, formatter);
+		task.setDeadline(dateTime);
 		task.setTitle(input1);
 		task.setDescription(input3);
 		dispose();

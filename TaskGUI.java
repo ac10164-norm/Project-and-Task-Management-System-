@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -46,10 +47,10 @@ public class TaskGUI extends JFrame {
                     b2.setBounds(240, 172, 117, 29);
                     contentPane.add(b2);
                     JLabel title = new JLabel("Title");
-                    title.setBounds(137, 45, 61, 16);
+                    title.setBounds(100, 45, 61, 16);
                     contentPane.add(title);
                     JLabel deadline = new JLabel("Deadline (yyyy-mm-dd)");
-                    deadline.setBounds(137, 93, 61, 16);
+                    deadline.setBounds(100, 93, 200, 16);
                     contentPane.add(deadline);
                 }
             case 2 ->                 {
@@ -114,7 +115,10 @@ public class TaskGUI extends JFrame {
     }
     
     void save(Project project, String input1, String input2) {
-        Task task = new Task(input1, LocalDateTime.parse(input2));
+        input2 += " 00:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(input2, formatter);
+        Task task = new Task(input1, dateTime);
         project.addTasks(task);
 		dispose();
     }
@@ -127,7 +131,7 @@ public class TaskGUI extends JFrame {
 		        c1.show();
 			}
 		}
-        dispose();
+        
 	}
 
 	void delete(Project project, String title) {
@@ -135,9 +139,10 @@ public class TaskGUI extends JFrame {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getTitle().equals(title)) {
 				project.removeTasks(list.get(i));
+                dispose();
 			}
 		}
-		dispose();
+		
 		
 	}
 }

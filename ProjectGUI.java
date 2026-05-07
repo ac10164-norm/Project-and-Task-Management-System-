@@ -154,10 +154,10 @@ public class ProjectGUI extends JFrame {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getTitle().equals(input)) {
 				EditProjectGUI c1 = new EditProjectGUI(list.get(i));
-			c1.show();
+				c1.show();
 			}
 		}
-		dispose();
+		
 	}
 
 	void delete(String title) {
@@ -166,9 +166,10 @@ public class ProjectGUI extends JFrame {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getTitle().equals(title)) {
 				p.deleteProject(list.get(i));
+				dispose();
 			}
 		}
-		dispose();
+		
 		
 	}
 
@@ -179,8 +180,9 @@ public class ProjectGUI extends JFrame {
 			if (list.get(i).getTitle().equals(title)) {
 				TaskGUI c1 = new TaskGUI(list.get(i), action);
 				c1.show();
+				dispose();
 			}
 		}
-		dispose();
+		
 	}
 }
