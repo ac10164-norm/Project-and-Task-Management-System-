@@ -1,5 +1,6 @@
-import java.swing.*;
-import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class ProjectGUI extends JFrame {
     
@@ -26,7 +27,7 @@ public class ProjectGUI extends JFrame {
 		JButton b1 = new JButton("Save");
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				convert(amount);
+				save();
 			}
 		});
 		b1.setBounds(51, 172, 117, 29);
@@ -37,11 +38,11 @@ public class ProjectGUI extends JFrame {
 		contentPane.add(b2);
 		
 		JLabel title = new JLabel("Title");
-		lblNewLabel.setBounds(82, 45, 146, 16);
+		title.setBounds(82, 45, 146, 16);
 		contentPane.add(title);
 		
 		JLabel deadline = new JLabel("Deadline");
-		lblNewLabel_1.setBounds(137, 93, 61, 16);
+		deadline.setBounds(137, 93, 61, 16);
 		contentPane.add(deadline);
     }
     

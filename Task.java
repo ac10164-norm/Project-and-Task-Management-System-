@@ -1,16 +1,17 @@
+import java.time.*;
 import java.util.*;
-import java.LocalDateTime.*;
+import java.time.temporal.ChronoUnit;
 
-public class Project {
-
+public class Task {
+    
     private String title;
     private String description;
     private LocalDateTime deadline;
     private LocalDateTime creationDate;
+    private Status status;
     private List<String> tags = new ArrayList<>();
-    private List<Tasks> tasks = new ArrayList<>();
 
-    public Project(String title, LocalDateTime deadline) {
+    public Task(String title, LocalDateTime deadline) {
         this.title = title;
         this.deadline = deadline;
         this.creationDate = LocalDateTime.now();
@@ -64,25 +65,9 @@ public class Project {
         this.tags.remove(tag);
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
-    }
-
-    public void addTasks(Task task) {
-        this.tasks.add(task);
-    }
-
-    public void removeTasks(Task task) {
-        this.tasks.remove(task);
-    }
-
-    public int calculateProgress() {
-        // for sally
-    }
-
     public boolean isOverdue() {
         LocalDateTime current = LocalDateTime.now();
-        if current.isAfter(this.deadline) {
+        if (current.isAfter(this.deadline)) {
             return true;
         }
         else {
@@ -100,5 +85,4 @@ public class Project {
             return false;
         }
     }
-
 }

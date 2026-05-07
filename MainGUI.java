@@ -1,5 +1,6 @@
-import java.swing.*;
-import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class MainGUI extends JFrame {
 
@@ -16,7 +17,7 @@ public class MainGUI extends JFrame {
 		JButton b1 = new JButton("Add Project");
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				convert_kg_lb();
+				addProject();
 			}
 		});
 		b1.setBounds(170, 54, 117, 29);
