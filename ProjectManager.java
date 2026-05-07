@@ -3,7 +3,7 @@ import java.util.*;
 
 public class ProjectManager {
 
-    private List<Project> projects = new ArrayList<>();
+    private static List<Project> projects = new ArrayList<>();
 
     public void createProject(String title, LocalDateTime deadline) {
         Project project = new Project(title, deadline);
@@ -11,7 +11,7 @@ public class ProjectManager {
     }
 
     public void editProject(Project project) {
-        
+
     }
 
     public void deleteProject(Project project) {
