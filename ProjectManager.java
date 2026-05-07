@@ -1,23 +1,25 @@
 import java.time.LocalDateTime;
+import java.time.format.*;
 import java.util.*;
 
 public class ProjectManager {
 
     private static List<Project> projects = new ArrayList<>();
 
-    public void createProject(String title, LocalDateTime deadline) {
-        Project project = new Project(title, deadline);
+    public void createProject(String title, String deadline) {
+        deadline += " 00:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(deadline, formatter);
+        Project project = new Project(title, dateTime);
         projects.add(project);
     }
 
-    public void editProject(String title, LocalDateTime deadline, String description) {
-		for (int i = 0; i < projects.size(); i++) {
-			if (projects.get(i).getTitle().equals(title)) {
-				projects.remove(i);
-			}
-		}
-        Project project = new Project(title, deadline);
-        projects.add(project);
+    public void editProject(Project project, String title, String deadline, String description) {
+        project.setTitle(title);
+        deadline += " 00:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(deadline, formatter);
+        project.setDeadline(dateTime);
         project.setDescription(description);
     }
 

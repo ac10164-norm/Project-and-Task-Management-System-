@@ -18,6 +18,7 @@ public class TaskGUI extends JFrame {
 
         switch (i) {
             case 1 ->                 {
+                    contentPane.setBorder(BorderFactory.createTitledBorder("Add Task"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 40, 130, 26);
                     contentPane.add(t1);
@@ -47,11 +48,12 @@ public class TaskGUI extends JFrame {
                     JLabel title = new JLabel("Title");
                     title.setBounds(137, 45, 61, 16);
                     contentPane.add(title);
-                    JLabel deadline = new JLabel("Deadline");
+                    JLabel deadline = new JLabel("Deadline (yyyy-mm-dd)");
                     deadline.setBounds(137, 93, 61, 16);
                     contentPane.add(deadline);
                 }
             case 2 ->                 {
+                    contentPane.setBorder(BorderFactory.createTitledBorder("Edit Task"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 68, 130, 26);
                     contentPane.add(t1);
@@ -60,7 +62,7 @@ public class TaskGUI extends JFrame {
                     b1.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             String input = t1.getText();
-                            editTask(input);
+                            editTask(project, input);
                         }
                     });
                     b1.setBounds(21, 172, 117, 29);
@@ -80,6 +82,7 @@ public class TaskGUI extends JFrame {
                     contentPane.add(taskName);
                 }
             case 3 ->                 {
+                    contentPane.setBorder(BorderFactory.createTitledBorder("Delete Task"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 68, 130, 26);
                     contentPane.add(t1);
@@ -116,9 +119,15 @@ public class TaskGUI extends JFrame {
 		dispose();
     }
 
-	void editTask(String input) {
-		EditTaskGUI c1 = new EditTaskGUI();
-		c1.show();
+	void editTask(Project project, String input) {
+        List<Task> list = project.getTasks();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getTitle().equals(input)) {
+                EditTaskGUI c1 = new EditTaskGUI(list.get(i));
+		        c1.show();
+			}
+		}
+        dispose();
 	}
 
 	void delete(Project project, String title) {

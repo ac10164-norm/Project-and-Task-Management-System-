@@ -1,5 +1,4 @@
 import java.awt.event.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -18,6 +17,7 @@ public class ProjectGUI extends JFrame {
 
         switch (i) {
             case 1 ->                 {
+					contentPane.setBorder(BorderFactory.createTitledBorder("Add Project"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 40, 130, 26);
                     contentPane.add(t1);
@@ -45,13 +45,14 @@ public class ProjectGUI extends JFrame {
                     b2.setBounds(240, 172, 117, 29);
                     contentPane.add(b2);
                     JLabel title = new JLabel("Title");
-                    title.setBounds(137, 45, 61, 16);
+                    title.setBounds(100, 45, 61, 16);
                     contentPane.add(title);
-                    JLabel deadline = new JLabel("Deadline");
-                    deadline.setBounds(137, 93, 61, 16);
+                    JLabel deadline = new JLabel("Deadline (yyyy-mm-dd)");
+                    deadline.setBounds(100, 93, 200, 16);
                     contentPane.add(deadline);
                 }
             case 2 ->                 {
+					contentPane.setBorder(BorderFactory.createTitledBorder("Edit Project"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 68, 130, 26);
                     contentPane.add(t1);
@@ -110,6 +111,7 @@ public class ProjectGUI extends JFrame {
                     contentPane.add(projectName);
                 }
             case 3 ->                 {
+					contentPane.setBorder(BorderFactory.createTitledBorder("Delete Project"));
                     JTextField t1 = new JTextField();
                     t1.setBounds(240, 68, 130, 26);
                     contentPane.add(t1);
@@ -142,13 +144,20 @@ public class ProjectGUI extends JFrame {
     
     void save(String input1, String input2) {
     	ProjectManager p = new ProjectManager();
-		p.createProject(input1, LocalDateTime.parse(input2));
+		p.createProject(input1, input2);
 		dispose();
     }
 
 	void editProject(String input) {
-		EditProjectGUI c1 = new EditProjectGUI();
-		c1.show();
+		ProjectManager p = new ProjectManager();
+		List<Project> list = p.getProjects();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getTitle().equals(input)) {
+				EditProjectGUI c1 = new EditProjectGUI(list.get(i));
+			c1.show();
+			}
+		}
+		dispose();
 	}
 
 	void delete(String title) {
@@ -172,5 +181,6 @@ public class ProjectGUI extends JFrame {
 				c1.show();
 			}
 		}
+		dispose();
 	}
 }

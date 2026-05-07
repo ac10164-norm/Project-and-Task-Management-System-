@@ -13,6 +13,7 @@ public class MainGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setBorder(BorderFactory.createTitledBorder("Main"));
 		
 		JButton b1 = new JButton("Add Project");
 		b1.addActionListener(new ActionListener() {
